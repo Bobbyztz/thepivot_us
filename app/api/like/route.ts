@@ -1,26 +1,22 @@
-import { promises as fs } from "fs";
 import { NextResponse } from "next/server";
-import path from "path";
+import { createClient } from '@supabase/supabase-js'
 
-async function ensureFileExists() {
-  const filePath = path.join(process.cwd(), "public/data/likes.json");
-  try {
-    await fs.access(filePath);
-  } catch {
-    // File doesn't exist, create it with initial data
-    await fs.mkdir(path.join(process.cwd(), "public/data"), {
-      recursive: true,
-    });
-    await fs.writeFile(filePath, JSON.stringify({ likes: 0 }));
-  }
-  return filePath;
-}
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // Use service role key for API routes
+)
 
 export async function GET() {
   try {
-    const filePath = await ensureFileExists();
-    const data = await fs.readFile(filePath, "utf8");
-    return NextResponse.json(JSON.parse(data));
+    // Get the likes count from the likes table
+    const { data, error } = await supabase
+      .from('likes')
+      .select('count')
+      .single()
+    
+    if (error) throw error;
+    
+    return NextResponse.json({ likes: data?.count || 0 });
   } catch (error) {
     console.error("GET Error:", error);
     return NextResponse.json(
@@ -32,12 +28,12 @@ export async function GET() {
 
 export async function POST() {
   try {
-    const filePath = await ensureFileExists();
-    const data = await fs.readFile(filePath, "utf8");
-    const likes = JSON.parse(data);
-    likes.likes += 1;
-    await fs.writeFile(filePath, JSON.stringify(likes));
-    return NextResponse.json(likes);
+    // Update the likes count using SQL increment
+    const { data, error } = await supabase.rpc('increment_likes')
+    
+    if (error) throw error;
+    
+    return NextResponse.json({ likes: data });
   } catch (error) {
     console.error("POST Error:", error);
     return NextResponse.json(
