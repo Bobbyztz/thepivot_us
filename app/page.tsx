@@ -51,7 +51,7 @@ export default function Home() {
           disabled={isLoading}
           className="bg-white text-black px-3 py-1 rounded-full hover:bg-gray-200 transition-colors disabled:opacity-50"
         >
-          Like
+          Like👍
         </button>
         <span className="text-white text-2xl">{likes}</span>
       </div>
