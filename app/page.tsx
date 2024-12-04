@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Every Pivot Matters",
+  title: "Make us great again",
   description: "A simple website with a powerful message",
 };
 
