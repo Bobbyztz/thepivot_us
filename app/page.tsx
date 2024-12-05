@@ -45,7 +45,7 @@ export default function Home() {
       <h1 className="text-4xl md:text-6xl font-bold text-white text-center">
         MAKE US GREAT AGAIN.
       </h1>
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <button
           onClick={handleLike}
           disabled={isLoading}
@@ -54,7 +54,7 @@ export default function Home() {
           Like👍
         </button>
         <span className="text-white text-2xl">{likes}</span>
-      </div>
+      </div> */}
     </div>
   );
 }
