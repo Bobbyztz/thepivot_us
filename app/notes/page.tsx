@@ -1,3 +1,14 @@
+import React from "react";
+
+export default function NotesPage() {
+  return (
+    <div>
+      <h1>Notes Page</h1>
+      <p>This page is now a valid module with a default export.</p>
+    </div>
+  );
+}
+
 // import { createClient } from "@/utils/supabase/server";
 
 // export default async function Notes() {
