@@ -17,8 +17,18 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "thepivot.us - Global Profiles for Everyone",
-  description: "thepivot.us旨在构建全球公众档案平台，连接中国和全球的用户，提供中文、英文和法语的多语言支持.",
-  keywords: ["global", "profile", "social", "交流", "中国", "英文", "法语"],
+  description:
+    "thepivot.us旨在构建全球公众档案平台，连接中国和全球的用户，提供中文、英文和法语的多语言支持.",
+  keywords: [
+    "global",
+    "personal",
+    "profile",
+    "social",
+    "交流",
+    "中国",
+    "英文",
+    "法语",
+  ],
   alternates: {
     canonical: "https://thepivot.us",
     languages: {
@@ -50,7 +60,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {children}
         <Analytics />
       </body>
